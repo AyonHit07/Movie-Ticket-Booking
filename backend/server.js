@@ -6,11 +6,16 @@ import { clerkMiddleware } from '@clerk/express'
 import { serve } from "inngest/express";
 import { inngest, functions } from "./inngest/index.js"
 
+import ServerlessHttp from "serverless-http";
+
 
 const app = express()
 const port = 3000
 
 await connectDB()
+
+export const serverless = ServerlessHttp(app)
+
 
 // middleware
 app.use(express.json())
