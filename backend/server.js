@@ -5,22 +5,20 @@ import connectDB from "./config/db.js";
 import { clerkMiddleware } from '@clerk/express'
 import { serve } from "inngest/express";
 import { inngest, functions } from "./inngest/index.js"
-
-import ServerlessHttp from "serverless-http";
-
+import serverless from 'serverless-http'
 
 const app = express()
 const port = 3000
 
 await connectDB()
 
-export const serverless = ServerlessHttp(app)
-
 
 // middleware
 app.use(express.json())
 app.use(cors())
 app.use(clerkMiddleware())
+
+export const serverl = serverless(app)
 
 app.get('/', (req, res) => {
     res.send(`Server is live`)
